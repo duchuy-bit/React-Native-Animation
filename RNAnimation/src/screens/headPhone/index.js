@@ -19,48 +19,27 @@ const WIDTH =  WIDTH_SCREEN - 32;
 
 const HEIGHT_TYPE =  40;
 
-
 export default function HeadPhoneScreen() {
 
     const scrollX = useRef(new Animated.Value(0)).current;
     
-    const inputRange = [ - WIDTH_SCREEN, 0,  WIDTH_SCREEN ];
-    const translateY_Type = scrollX.interpolate({
-        inputRange,
-        outputRange: [HEIGHT_TYPE, 0, - HEIGHT_TYPE]
-    })
-    
+    const inputRange = [ - WIDTH_SCREEN, 0,  WIDTH_SCREEN ];   
     
     const translateXDotIndicator = scrollX.interpolate({
         inputRange,
         outputRange: [ - 52, 0, 52]
     })
     
-    // const item = scrollX.interpolate
-    
-    // useEffect(()=>{
-    //     console.log(scrollX)
-    // },[scrollX])
-
   return (
     <View>
-        <SafeAreaView/>
+        <SafeAreaView/>        
+        {/* -------- TYPE ---------- */}
+        <TypeHeadPhone scrollX={scrollX}/>
         
-        {/* =========================================== TYPE ==================================== */}
-        <View style={styles.typeContainer}>
-            <Animated.View style={{transform:[{ translateY: translateY_Type }] }}>
-                {/* <FlatList
-                    data={listData}
-                    renderItem={({item, index})=><Text style={styles.typeItem}>{item.type}</Text>}
-                /> */}
-                {
-                    listData.map((item, index) =><Text style={styles.typeItem} key={index}>{item.type}</Text>)
-                }
-            </Animated.View>
-        </View>
+        {/*  ---------- BACKGROUND COLOR OF ITEM  --------- */}
+        <BackgroundItem  scrollX={scrollX}/>
         
-        <BackgroundItem scrollX={scrollX}/>
-        
+        {/* -------- LIST ITEM ---------- */}
         <Animated.FlatList
             data={listData}
             style={{marginTop: 70}}
@@ -71,28 +50,14 @@ export default function HeadPhoneScreen() {
             onScroll={ Animated.event(
                 [{ nativeEvent: { contentOffset: { x: scrollX }}}],
                 {useNativeDriver: true},
-                // {listener: (event) => {
-                //     console.log(event.nativeEvent.contentOffset.y);
-                // }}
-            )}
-            // onScroll={event => { 
-            //     // this.yOffset = event.nativeEvent.contentOffset.y
-            //     console.log(event.nativeEvent.contentOffset.x);
-
-            //   }}
-            
+            )}            
             scrollEventThrottle={16}
-
         />
-            
         
+        {/* -------- INFO DEV ---------- */}
+        <InfoDev />
         
-        <View style={{bottom: 130, left: -50,position:'absolute', zIndex: 10,}}>
-            <Text style={[styles.typeItem, {  transform:[{rotate: '-90deg'}] }]}> BEAR DEV</Text>
-        </View>
-        
-        
-        
+        {/* -------- DOT INDICATOR ---------- */}
         <View style={{bottom: 30, right: 40,position:'absolute', zIndex: 10,justifyContent:'center'}}>
             <FlatList
                 data={listData}
@@ -125,26 +90,22 @@ function Item ({index, item, scrollX}){
     const scaleImage = scrollX.interpolate({
         inputRange,
         outputRange: [0, 1, 0]
-    })
-    
+    })    
     const translateXHeading = scrollX.interpolate({
         inputRange,
         outputRange: [WIDTH_SCREEN * 0.2 , 0 , - WIDTH_SCREEN * 0.2]
-    })
-    
+    })    
     const translateXDescription = scrollX.interpolate({
         inputRange,
         outputRange: [WIDTH_SCREEN * 0.6 , 0 , - WIDTH_SCREEN * 0.6]
-    })
-    
+    })    
     const opacity = scrollX.interpolate({
         inputRange: inputRangeOpacity,
         outputRange: [0, 1, 0]
     })
     
     return(
-    <View style={{width: WIDTH_SCREEN, minHeight: HEIGHT_SCREEN, padding: 16}}>
-        
+    <View style={{width: WIDTH_SCREEN, minHeight: HEIGHT_SCREEN, padding: 16}}>        
         
         {/* =========================================== IMAGE ==================================== */}
         <View style={{marginTop: 16}}>
@@ -152,10 +113,7 @@ function Item ({index, item, scrollX}){
                 source={item.imageUri}
                 style={{width: WIDTH, height: WIDTH, transform:[{scale: scaleImage}] }}
                 resizeMode='contain'
-            />
-            
-            {/* <View style={{backgroundColor}}/> */}
-            
+            />            
         </View>
         
         {/* =========================================== DETAIL ==================================== */}
@@ -176,21 +134,6 @@ const BackgroundItem  = ({scrollX})=>{
 
     return(
     <View style={[StyleSheet.absoluteFillObject,{  alignItems:'center', top: 65}]}>
-        {/* <FlatList
-            data={listData}
-            // horizontal
-            renderItem={({item, index})=>{
-                return(
-                    <View style={{
-                        // position:'absolute',
-                        backgroundColor:item.color,                        
-                        borderRadius: 500,
-                        width: WIDTH -100,
-                        height: WIDTH -100
-                    }}/>                    
-                )
-            }}
-        /> */}
         {
             listData.map((item, index)=> {
                 const inputRange = [ (index - 0.55)* WIDTH_SCREEN, index * WIDTH_SCREEN, (index + 0.55)* WIDTH_SCREEN ];
@@ -198,8 +141,7 @@ const BackgroundItem  = ({scrollX})=>{
                     inputRange, 
                     outputRange: [ 0, 1 ,0],
                     extrapolate: 'clamp'
-                })
-                
+                })                
                 const opacity = scrollX.interpolate({
                     inputRange, 
                     outputRange: [ 0, 0.2 ,0],
@@ -214,13 +156,38 @@ const BackgroundItem  = ({scrollX})=>{
                         height: WIDTH,
                         transform: [{ scale: scale }],
                         opacity: opacity
-                    }}/>
+                    }} key={index}/>
                 )
             })
         }
     </View> 
-    )
+    )    
+}
+
+const TypeHeadPhone = ({scrollX})=>{    
+    const inputRange = [ - WIDTH_SCREEN, 0,  WIDTH_SCREEN ];
+    const translateY_Type = scrollX.interpolate({
+        inputRange,
+        outputRange: [HEIGHT_TYPE, 0, - HEIGHT_TYPE]
+    })
     
+    return(
+        <View style={styles.typeContainer}>
+            <Animated.View style={{transform:[{ translateY: translateY_Type }] }}>
+                {
+                    listData.map((item, index) =><Text style={styles.typeItem} key={index}>{item.type}</Text>)
+                }
+            </Animated.View>
+        </View>
+    )
+}
+
+const InfoDev = ()=>{
+    return(
+        <View style={{bottom: 130, left: -50,position:'absolute', zIndex: 10,}}>
+            <Text style={[styles.typeItem, {  transform:[{rotate: '-90deg'}] }]}> BEAR DEV</Text>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
