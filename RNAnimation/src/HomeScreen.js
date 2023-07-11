@@ -26,9 +26,9 @@ const listScreen = [
     image: require("./images/HomePostCard.jpg"),
   },
   {
-    name: "HeadPhoneScreen",
-    title: 'Head Phone',
-    image: require("./images/headphone.jpg"),
+    name: "CarouselScreen",
+    title: 'Carousel Screen',
+    image: require("./images/HomeCarousel.jpg"),
   },
   {
     name: "HeadPhoneScreen",
