@@ -50,6 +50,19 @@ react {
     // hermesFlags = ["-O", "-output-source-map"]
 }
 
+// apply from: "../../node_modules/react-native/react.gradle"
+
+// project.ext.reanimated = [
+//     buildFromSource: true
+// ]
+
+project.ext.react = [
+    enableHermes: false,  // clean and rebuild if changing
+]
+
+
+def enableHermes = project.ext.react.get("enableHermes", false);
+
 /**
  * Set this to true to Run Proguard on Release builds to minify the Java bytecode.
  */
