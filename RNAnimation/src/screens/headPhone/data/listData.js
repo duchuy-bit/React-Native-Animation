@@ -17,7 +17,7 @@ export default [
     },
     {
       type: 'Humlan P',
-      imageUri: require('../../../images/urbanears_grey.png'),
+      imageUri: require('../../../images/urbanears_mint.png'),
       heading: 'Great quality',
       description:
         'An Urbanears classic! Listen-all-day fit. Striking the perfect balance of effortless technology',

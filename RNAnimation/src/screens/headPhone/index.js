@@ -6,11 +6,14 @@ import {
   FlatList,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import listData from './data/listData';
+import { useNavigation } from '@react-navigation/native';
+import { SharedElement } from 'react-navigation-shared-element';
 
 const WIDTH_SCREEN = Dimensions.get("screen").width;
 const HEIGHT_SCREEN = Dimensions.get("screen").height;
@@ -103,23 +106,30 @@ function Item ({index, item, scrollX}){
         inputRange: inputRangeOpacity,
         outputRange: [0, 1, 0]
     })
+
+    const navigation = useNavigation();
     
     return(
     <View style={{width: WIDTH_SCREEN, minHeight: HEIGHT_SCREEN, padding: 16}}>        
         
         {/* =========================================== IMAGE ==================================== */}
-        <View style={{marginTop: 16}}>
-            <Animated.Image
-                source={item.imageUri}
-                style={{width: WIDTH, height: WIDTH, transform:[{scale: scaleImage}] }}
-                resizeMode='contain'
-            />            
-        </View>
+        
+        <TouchableOpacity activeOpacity={0.8} onPress={()=> navigation.navigate("DetailHeadPhone", {item: item})} 
+            style={{marginTop: 16,
+        }}>
+            <SharedElement id={`item.${item.key}.image`} style={StyleSheet.absoluteFillObject}>
+                <Animated.Image
+                    source={item.imageUri}
+                    style={{width: WIDTH, height: WIDTH, transform:[{scale: scaleImage}],position:'absolute'}}
+                    resizeMode='contain'
+                />            
+            </SharedElement>
+        </TouchableOpacity>
         
         {/* =========================================== DETAIL ==================================== */}
-        <View style={{marginLeft: 70, marginTop: 60}}>
+        <View style={{marginLeft: 70, marginTop: 60 + WIDTH }}>
             <Animated.Text style={{fontSize: 22, fontWeight:'600',textTransform:'uppercase', transform:[{translateX: translateXHeading}], opacity}}>
-                {item.heading}
+                {item.heading} {index}
             </Animated.Text>
             <Animated.Text style={{fontSize: 16,color:"grey" , transform:[{translateX: translateXDescription}],opacity}}>
                 {item.description}
@@ -133,7 +143,7 @@ function Item ({index, item, scrollX}){
 const BackgroundItem  = ({scrollX})=>{
 
     return(
-    <View style={[StyleSheet.absoluteFillObject,{  alignItems:'center', top: 65}]}>
+    <View style={[StyleSheet.absoluteFillObject,{  alignItems:'center', top: 65, zIndex: -1,}]}>
         {
             listData.map((item, index)=> {
                 const inputRange = [ (index - 0.55)* WIDTH_SCREEN, index * WIDTH_SCREEN, (index + 0.55)* WIDTH_SCREEN ];
@@ -148,15 +158,19 @@ const BackgroundItem  = ({scrollX})=>{
                     extrapolate: 'clamp'
                 })
                 return(
-                    <Animated.View style={{
-                        position:'absolute',
-                        backgroundColor:item.color,                        
-                        borderRadius: 500,
-                        width: WIDTH ,
-                        height: WIDTH,
-                        transform: [{ scale: scale }],
-                        opacity: opacity
-                    }} key={index}/>
+                    <SharedElement id={`item.${item.key}.backgroundColor`}  key={index} 
+                        style={{position:"absolute",zIndex: -1,
+                    }}>
+                        <Animated.View style={{
+                            // position:'absolute',
+                            backgroundColor:item.color,                        
+                            borderRadius: 500,
+                            width: WIDTH ,
+                            height: WIDTH,
+                            transform: [{ scale: scale }],
+                            opacity: opacity
+                        }}/>
+                    </SharedElement>
                 )
             })
         }
