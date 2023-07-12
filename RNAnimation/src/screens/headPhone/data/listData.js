@@ -1,7 +1,7 @@
 export default [
     {
       type: 'Humlan P',
-      imageUri: require('../../../images/urbanears_blue.png'),
+      imageUri: require('../../../assets/images/urbanears_blue.png'),
       heading: 'Vibrant colors',
       description: 'Four on-trend colorways to seamlessly suit your style.',
       key: 'first',
@@ -9,7 +9,7 @@ export default [
     },
     {
       type: 'Pampas',
-      imageUri: require('../../../images/urbanears_grey.png'),
+      imageUri: require('../../../assets/images/urbanears_pink.png'),
       heading: 'Redefined sound',
       description: 'A bold statement tuned to perfection.',
       key: 'second',
@@ -17,7 +17,7 @@ export default [
     },
     {
       type: 'Humlan P',
-      imageUri: require('../../../images/urbanears_mint.png'),
+      imageUri: require('../../../assets/images/urbanears_grey.png'),
       heading: 'Great quality',
       description:
         'An Urbanears classic! Listen-all-day fit. Striking the perfect balance of effortless technology',
@@ -26,7 +26,7 @@ export default [
     },
     {
       type: 'Humlan B',
-      imageUri: require('../../../images/urbanears_mint.png'),
+      imageUri: require('../../../assets/images/urbanears_mint.png'),
       heading: 'From Sweden',
       description:
         'The “Plattan” in Plattan headphones is Swedish for “the slab.”',

@@ -24,7 +24,7 @@ export default function MainNavigation() {
       <Stack.Screen name="DetailHeadPhone" component={DetailHeadPhone}  options={{headerShown: false}}
         sharedElements={(route, otherRoute, showing) => {
           const { item } = route.params;
-          console.log("item  sharedElements : ",item)
+          // console.log("item  sharedElements : ",item)
           return [
               {id:`item.${item.key}.backgroundColor`},
               {id: `item.${item.key}.image`},              

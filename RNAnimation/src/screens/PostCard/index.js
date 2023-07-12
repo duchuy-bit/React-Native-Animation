@@ -4,12 +4,12 @@ import React, { useRef } from 'react'
 const { width, height } = Dimensions.get('screen');
 
 const data = [
-    require("../../images/postcard/image1.png"),
-    require("../../images/postcard/image2.png"),
-    require("../../images/postcard/image3.png"),
-    require("../../images/postcard/image4.png"),
-    require("../../images/postcard/image5.png"),
-    require("../../images/postcard/image6.png"),
+    require("../../assets/images/postcard/image1.png"),
+    require("../../assets/images/postcard/image2.png"),
+    require("../../assets/images/postcard/image3.png"),
+    require("../../assets/images/postcard/image4.png"),
+    require("../../assets/images/postcard/image5.png"),
+    require("../../assets/images/postcard/image6.png"),
 ];
 
 const imageW = width * 0.7;

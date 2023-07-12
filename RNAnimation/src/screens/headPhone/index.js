@@ -128,10 +128,10 @@ function Item ({index, item, scrollX}){
         
         {/* =========================================== DETAIL ==================================== */}
         <View style={{marginLeft: 70, marginTop: 60 + WIDTH }}>
-            <Animated.Text style={{fontSize: 22, fontWeight:'600',textTransform:'uppercase', transform:[{translateX: translateXHeading}], opacity}}>
+            <Animated.Text style={{fontSize: 22, fontFamily:"Montserrat-Bold",textTransform:'uppercase', transform:[{translateX: translateXHeading}], opacity}}>
                 {item.heading} {index}
             </Animated.Text>
-            <Animated.Text style={{fontSize: 16,color:"grey" , transform:[{translateX: translateXDescription}],opacity}}>
+            <Animated.Text style={{fontSize: 16,color:"grey" , fontFamily:"Montserrat-Regular" , transform:[{translateX: translateXDescription}],opacity}}>
                 {item.description}
             </Animated.Text>
         </View>
@@ -143,7 +143,7 @@ function Item ({index, item, scrollX}){
 const BackgroundItem  = ({scrollX})=>{
 
     return(
-    <View style={[StyleSheet.absoluteFillObject,{  alignItems:'center', top: 65, zIndex: -1,}]}>
+    <View style={[StyleSheet.absoluteFillObject,{  alignItems:'center', top: 130, zIndex: -1,}]}>
         {
             listData.map((item, index)=> {
                 const inputRange = [ (index - 0.55)* WIDTH_SCREEN, index * WIDTH_SCREEN, (index + 0.55)* WIDTH_SCREEN ];
@@ -165,8 +165,8 @@ const BackgroundItem  = ({scrollX})=>{
                             // position:'absolute',
                             backgroundColor:item.color,                        
                             borderRadius: 500,
-                            width: WIDTH ,
-                            height: WIDTH,
+                            width:  WIDTH *2 /3,
+                            height: WIDTH *2 /3,
                             transform: [{ scale: scale }],
                             opacity: opacity
                         }}/>
@@ -215,7 +215,8 @@ const styles = StyleSheet.create({
     },
     typeItem:{
         fontSize: 30,
-        fontWeight:'800',
+        // fontWeight:'800',
+        fontFamily:"Montserrat-Bold",
         textTransform:'uppercase'
     }
 })

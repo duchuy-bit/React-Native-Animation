@@ -18,27 +18,27 @@ const listScreen = [
   {
     name: "HeadPhoneScreen",
     title: 'Head Phone',
-    image: require("./images/headphone.jpg"),
+    image: require("./assets/images/headphone.jpg"),
   },
   {
     name: "PostCard",
     title: 'Post Card',
-    image: require("./images/HomePostCard.jpg"),
+    image: require("./assets/images/HomePostCard.jpg"),
   },
   {
     name: "CarouselScreen",
     title: 'Carousel Screen',
-    image: require("./images/HomeCarousel.jpg"),
+    image: require("./assets/images/HomeCarousel.jpg"),
   },
   {
     name: "HeadPhoneScreen",
     title: 'Head Phone',
-    image: require("./images/headphone.jpg"),
+    image: require("./assets/images/headphone.jpg"),
   },
   {
     name: "HeadPhoneScreen",
     title: 'Head Phone',
-    image: require("./images/headphone.jpg"),
+    image: require("./assets/images/headphone.jpg"),
   }
 ]
 
@@ -51,7 +51,7 @@ export default function HomeScreen() {
   return (
     <View style={{backgroundColor: '#F6F6F6', flex: 1}}>
       <SafeAreaView style={{paddingHorizontal: 40,paddingVertical: 20, backgroundColor: '#F6F6F6'}}>
-        <Text style={{fontSize: 28, fontWeight:'800', color:'black', textTransform:'uppercase'}}>Dev Bear</Text>
+        <Text style={{fontSize: 28, color:'black', textTransform:'uppercase',fontFamily:'Montserrat-Bold'}}>BEAR DEV</Text>
       </SafeAreaView>
 
       {/* <View>
@@ -75,7 +75,7 @@ export default function HomeScreen() {
                 <TouchableOpacity onPress={()=> navigation.navigate(item.name)} style={styles.itemContainer} >
                   <Image source={item.image} style={{width: width/ 2 - 32, height: width/ 2 - 32, }}/>
                   <View style={{width:'100%', backgroundColor:'white', paddingBottom: 16, alignItems:'center'}}> 
-                    <Text style={{fontSize: 18, marginTop: 8}} numberOfLines={1}>{item.title}</Text>
+                    <Text style={{fontSize: 16, marginTop: 8, fontFamily:'Montserrat-Bold'}} numberOfLines={1}>{item.title}</Text>
                   </View>
                 </TouchableOpacity>
               </View>
