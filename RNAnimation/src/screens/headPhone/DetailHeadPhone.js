@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, SafeAreaView,TouchableOpacity,Image, Dimensions } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, SafeAreaView,TouchableOpacity,Image, Dimensions, Linking, Animated, Easing, Pressable, ToastAndroid } from 'react-native'
+import React, { useRef, useState } from 'react'
 import { Icon } from 'react-native-elements';
 
 import { useNavigation } from '@react-navigation/native';
@@ -9,7 +9,9 @@ import { SharedElement } from 'react-navigation-shared-element';
 import { color } from 'react-native-reanimated';
 
 
-const { width, height } = Dimensions.get('screen')
+const { width, height } = Dimensions.get('screen');
+
+
 
 // ------------ TEXT ANIMATION -------
 const letterAnimation = {
@@ -25,12 +27,12 @@ const letterAnimationGoBack = {
 
 // ------------ ICON CLOSE ANIMATION -------
 const iconAnimation  = {
-    0: { opacity: 0, scale: 0, rotate: '180deg'},
+    0: { opacity: 0, scale: 0, rotate: '270deg'},
     1: { opacity: 1, scale: 1, rotate: '0deg'},
 }
 const iconAnimationGoback  = {
     0: { opacity: 1, scale: 1, rotate: '0deg'},
-    1: { opacity: 0, scale: 0, rotate: '180deg'},
+    1: { opacity: 0, scale: 0, rotate: '270deg'},
 }
 
 
@@ -39,21 +41,21 @@ const FIELD_DELAY  = 400
 const FIELD_DURATION  = 950 
 
 const fieldLeftAnimation  = {
-    0: {  opacity: 0, translateX: width * 0.32 + 20, },
+    0: {  opacity: 0, translateX: - width * 0.32 , },
     1: {  opacity: 1, translateX: 0},
 }
 const fieldLeftAnimationGoBack  = {
     0: {  opacity: 1, translateX: 0},
-    1: {  opacity: 0, translateX: width * 0.32 + 20},    
+    1: {  opacity: 0, translateX:  - width * 0.32 },    
 }
 // ------------ FIELD RIGHT ANIMATION -------
 const fieldRightAnimation  = {
-    0: {  opacity: 0, translateX: width * 0.68 + 20},
+    0: {  opacity: 0, translateX: width * 0.68 },
     1: {  opacity: 1, translateX: 0},
 }
 const fieldRightAnimationGoBack  = {
     0: {  opacity: 1, translateX: 0},
-    1: {  opacity: 0, translateX: width * 0.68 + 20},    
+    1: {  opacity: 0, translateX: width * 0.68 },    
 }
 
 // ------------ FOOTER ANIMATION -------
@@ -70,7 +72,8 @@ const DURATION_GO_BACK = 500
 
 export default function DetailHeadPhone({route}) {
 
-    const item = route?.params?.item
+    const item = route?.params?.item;
+
     // console.log('item: ',item)
     const navigation = useNavigation();
 
@@ -80,7 +83,139 @@ export default function DetailHeadPhone({route}) {
         Math.pow(height, 2) + Math.pow(width , 2)
     )
 
-    // console.log("  width: ",width,"  circleSize: ",Math.pow(width , 2))
+    const touchPlayVideo = () => {
+        const url = "https://www.youtube.com/watch?v=Yum4BWve6GY&ab_channel=Huy%C4%90%E1%BB%A9c";
+        try{
+            Linking.openURL(url)
+        }catch (error){
+            console.log(" error Opne URL: ",error)
+        }
+    }
+
+    const width_addToCart = width * 0.62;
+
+    const iconHeadphoneAnim = useRef(new Animated.Value(0)).current;
+    const iconHeadphoneScale = useRef(new Animated.Value(0)).current;
+
+    const animationIconHeadphone = () =>{
+        Animated.sequence([
+            // Refresh  all animation
+            Animated.parallel([
+                Animated.timing( iconHeadphoneAnim,{
+                    useNativeDriver: true,
+                    duration: 10,
+                    toValue: 0,
+                    // easing: Easing.bezier(0.33, 1, 0.68, 1)
+                }),
+                Animated.timing( iconHeadphoneScale,{
+                    useNativeDriver: true,
+                    duration: 10,
+                    toValue: 0,
+                    // easing: Easing.bezier(0.33, 1, 0.68, 1)
+                }),
+            ]),
+
+            // Delay 500s to scale and go to Y
+            Animated.parallel([
+                Animated.timing( iconHeadphoneAnim,{
+                    useNativeDriver: true,
+                    duration: 250,
+                    toValue: 0,
+                    // easing: Easing.bezier(0.33, 1, 0.68, 1)
+                }),
+                Animated.timing( iconHeadphoneScale,{
+                    useNativeDriver: true,
+                    duration: 250,
+                    toValue: 1,
+                    // easing: Easing.bezier(0.33, 1, 0.68, 1)
+                }),
+            ]),
+
+            //    Start go down 
+            Animated.timing( iconHeadphoneAnim,{
+                useNativeDriver: true,
+                duration: 600,
+                toValue: 1,
+                // easing: Easing.bezier(0.33, 1, 0.68, 1)
+            })
+
+
+        ]).start();
+    }
+
+    const textAddToCartAnim = useRef(new Animated.Value(0)).current;
+    const animationTextAddtoCart = () => {
+        Animated.sequence([
+            Animated.timing( textAddToCartAnim,{
+                useNativeDriver: true,
+                duration: 500,
+                toValue: 1,
+                // easing: Easing.bezier(0.33, 1, 0.68, 1)
+            }),
+            Animated.timing( textAddToCartAnim,{
+                useNativeDriver: true,
+                duration: 100,
+                delay: 1100,
+                toValue: 0,
+                // easing: Easing.bezier(0.33, 1, 0.68, 1)
+            }),
+        ]).start();
+    }
+
+    const iconAddToCartAnim = useRef(new Animated.Value(0)).current;
+    const animationIconAddtoCart = () => {
+        Animated.sequence([
+            Animated.timing( iconAddToCartAnim,{
+                useNativeDriver: true,
+                duration: 750,
+                toValue: 1,
+                // easing: Easing.bezier(0.33, 1, 0.68, 1)
+                // easing: Easing.bezier(0.32, 0, 0.67, 0)
+            }),
+            Animated.timing( iconAddToCartAnim,{
+                useNativeDriver: true,
+                duration: 200,
+                toValue: 2,
+                // easing: Easing.bezier(0.33, 1, 0.68, 1)
+            }),
+            Animated.timing( iconAddToCartAnim,{
+                useNativeDriver: true,
+                duration: 500,
+                toValue: 3,
+                easing: Easing.bezier(0.33, 1, 0.68, 1)
+            }),
+            Animated.timing( iconAddToCartAnim,{
+                useNativeDriver: true,
+                duration: 100,
+                delay:  100,
+                toValue: 0,
+                // easing: Easing.bezier(0.33, 1, 0.68, 1)
+            }),
+        ]).start();
+    }
+
+    const [ isDisableAddToCart , setIsDisableAddToCart] = useState(false)
+
+    const touchAddToCart = () =>{
+        setIsDisableAddToCart(true)
+
+        animationIconHeadphone();
+
+        animationTextAddtoCart();
+
+        animationIconAddtoCart();
+
+        setTimeout(()=>{
+            setIsDisableAddToCart(false)
+            ToastAndroid.showWithGravityAndOffset(
+                'Added To Cart!',
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER,
+                25,
+                50,
+              );
+        }, 1700)
+    }
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor:"#FFF"}}>
@@ -174,10 +309,10 @@ export default function DetailHeadPhone({route}) {
                 >
                     <Text style={{fontSize:18, fontWeight:'800'}}>{item.heading}</Text>
                     <View style={{justifyContent:'flex-end', flex: 1, }}></View>
-                    <View style={{justifyContent:'space-around', flexDirection:'row', alignItems:'center'}}>
+                    <TouchableOpacity activeOpacity={0.6} onPress={()=>touchPlayVideo()} style={{justifyContent:'space-around', flexDirection:'row', alignItems:'center'}}>
                         <Text style={{fontSize:16, fontWeight:'800'}}>Play Video  </Text>
                         <Icon type='antdesign' name='playcircleo' color={'#000'} size={20}/>
-                    </View>
+                    </TouchableOpacity>
                 </Animatable.View>
             </View>
             <View style={{height: 230, width: '62%', paddingRight: 16, paddingLeft: 8, overflow:"hidden"}}>
@@ -206,9 +341,66 @@ export default function DetailHeadPhone({route}) {
                 <Text style={{fontSize: 18, fontFamily:'Montserrat-Bold', textTransform:'uppercase', color: item.color}}>161 USD</Text>
             </View>
 
-            <TouchableOpacity activeOpacity={0.6} style={{height: 50, width: '62%',  backgroundColor: item.color, alignItems:'center', justifyContent:'center'}}>
-                <Text style={{fontSize: 18, fontFamily:'Montserrat-Bold', textTransform:'uppercase'}}>Add To Cart</Text>
-            </TouchableOpacity>
+            <View style={{flex: 1}}>
+                <Pressable  onPress={()=> touchAddToCart()} disabled={isDisableAddToCart} style={{height: 50,  flexDirection:'row', 
+                    backgroundColor: item.color, 
+                    alignItems:'center', justifyContent:'flex-start', 
+                    paddingLeft: 16
+                }}>
+                    <Animated.View style={{
+                        transform: [
+                            { translateX: iconAddToCartAnim.interpolate({
+                                inputRange: [0 , 1 , 2, 3],
+                                outputRange: [0, width_addToCart/ 2 - 27, width_addToCart/ 2 - 27, width_addToCart  ]
+                            })},
+                            { scale: iconAddToCartAnim.interpolate({
+                                inputRange: [0 , 0.8, 1 , 2, 3],
+                                outputRange: [1, 1.2, 1.9,  1, 1  ]
+                            })},
+                        ]
+                    }}>
+                        <Icon type='fontawesome5' name='shopping-cart' color={'#000'} size={25}/>
+                    </Animated.View>
+                    <View style={{width: 8}} />
+                    <Animated.Text style={{fontSize: 18, fontFamily:'Montserrat-Bold', textTransform:'uppercase',
+                        opacity: textAddToCartAnim.interpolate({
+                            inputRange: [0,  0.5],
+                            outputRange: [ 1, 0 ]
+                        }),
+                        transform: [  
+                            { translateX: textAddToCartAnim.interpolate({
+                                inputRange: [0,  1],
+                                outputRange: [ 0, width_addToCart -50 ]
+                            }) }
+                        ]
+                    }}>
+                        Add To Cart
+                    </Animated.Text>
+                </Pressable>
+                <Animated.View style={{position:'absolute',zIndex: -1, alignSelf:'center',
+                    // paddingVertical: 5, 
+                    // paddingHorizontal: 5, backgroundColor:item.color,
+                    // borderRadius: 50,
+                    // opacity: iconHeadphoneAnim.interpolate({
+                    //     inputRange: [0,  1 ],
+                    //     outputRange: [ 0 , 1 ]
+                    // }), 
+                    transform: [
+                        {  translateY: iconHeadphoneAnim.interpolate({
+                                inputRange: [0,  1],
+                                outputRange: [ - 80, 10 ]
+                            }) ,                            
+                        },
+                        { scale: iconHeadphoneScale }
+                    ]
+                }}>
+                    <Icon type='fontisto' name='headphone' color={'#000'} size={25}/>
+                    {/* <Image 
+                        source={item.imageUri}
+                        style={{height: 25, width: 25, resizeMode:'contain'}}
+                    /> */}
+                </Animated.View>
+            </View>
         </Animatable.View>
 
 

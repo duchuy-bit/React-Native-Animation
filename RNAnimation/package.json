@@ -13,7 +13,7 @@
     "test": "jest",
     "lint": "eslint .",
     "gradlew": "cd android && gradlew cleanBuildCache && ./gradlew clean && cd ../",
-    "release": "react-native run-android --variant=release",
+    "release": "react-native run-android --mode=release",
     "publish": "cd android && ./gradlew assembleRelease && cd ../",
     "link_font": "npx react-native-asset",
     "link": "npx react-native link",
