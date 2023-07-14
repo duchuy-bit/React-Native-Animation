@@ -31,8 +31,8 @@ const listScreen = [
     image: require("./assets/images/HomeCarousel.jpg"),
   },
   {
-    name: "HeadPhoneScreen",
-    title: 'Head Phone',
+    name: "PhotoGraphyScreen",
+    title: 'Photo Graphy',
     image: require("./assets/images/headphone.jpg"),
   },
   {

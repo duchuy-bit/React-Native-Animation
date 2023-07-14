@@ -13,6 +13,7 @@ import { createSharedElementStackNavigator } from 'react-navigation-shared-eleme
 const Stack = createSharedElementStackNavigator();
 
 import {enableScreens} from 'react-native-screens';
+import PhotoGraphyScreen from '../screens/PhotoGraphy';
 enableScreens();
 
 export default function MainNavigation() {
@@ -34,6 +35,8 @@ export default function MainNavigation() {
 
       <Stack.Screen name="PostCard" component={PostCard}  options={{headerShown: false}}/>
       <Stack.Screen name="CarouselScreen" component={CarouselScreen}  options={{headerShown: false}}/>
+
+      <Stack.Screen name="PhotoGraphyScreen" component={PhotoGraphyScreen}  options={{headerShown: false}}/>
       
       {/* <Stack.Screen name="Notifications" component={Notifications} />
       <Stack.Screen name="Profile" component={Profile} />
