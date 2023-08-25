@@ -4,6 +4,9 @@ import ThreeCardComp from './components/ThreeCardComp'
 import ThreeCardCompVer2 from './components/ThreeCardComp_2'
 import ThreeCardCompVer3 from './components/ThreeCardComp_3'
 import { ScrollView } from 'react-native'
+import ThreeCardCompVer4 from './components/ThreeCardComp_4'
+import ThreeCardCompVer5 from './components/ThreeCardComp_5'
+import ThreeCardCompVer6 from './components/ThreeCardComp_6'
 
 export default function CreditCard() {
     return (
@@ -20,6 +23,14 @@ export default function CreditCard() {
             <View style={{height: 200, width: 30, }}/>
 
             <ThreeCardCompVer3 />
+
+            {/* <View style={{height: 200, width: 30, }}/> */}
+
+            <ThreeCardCompVer4 />
+
+            <ThreeCardCompVer5 />
+
+            <ThreeCardCompVer6 />
             
 
         </ScrollView>

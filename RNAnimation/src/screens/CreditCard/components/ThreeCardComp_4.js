@@ -43,7 +43,7 @@ if (Platform.OS === 'android') {
     }
   }
 
-export default function ThreeCardCompVer3() {
+export default function ThreeCardCompVer4() {
 
     const [ indexCard  , setIndexCard ]= useState(0);
     const [ lastedIndexCard  , setLastedIndexCard ]= useState(0);
@@ -54,49 +54,6 @@ export default function ThreeCardCompVer3() {
     const cardOneAnim = useRef(new Animated.Value(0)).current;
     const cardTwoAnim = useRef(new Animated.Value(0)).current;
     const cardThreeAnim = useRef(new Animated.Value(0)).current;
-
-    // Rotate Card in Corner
-    const rotateZ_Card_One = () => {
-        let transform = {
-            transform: [{ perspective: 400 }, { rotateZ: cardOneAnim.interpolate({
-                inputRange: [0 , 1 , 2],
-                outputRange: [ '0deg', '-90deg', "0deg" ]
-            }) }],
-        };
-        return withAnchorPoint(transform, { x: 0, y: 1 }, { width: width *0.6, height: heightCard });
-    };
-
-    const rotateZ_Card_Two = () => {
-        let transform = {
-            transform: [{ perspective: 400 }, { rotateZ: cardTwoAnim.interpolate({
-                inputRange: [0 , 1 , 2],
-                outputRange: [ '0deg', '-90deg', "0deg" ]
-            }) }],
-        };
-        return withAnchorPoint(transform, { x:  0, y: 1 }, { width: width *0.6, height: heightCard });
-    };
-
-    const rotateZ_Card_Two_2 = () => {
-        let transform = {
-            transform: [{ perspective: 400 }, { rotateZ: cardTwoAnim.interpolate({
-                inputRange: [0 , 1 , 2],
-                outputRange: [ '0deg', '90deg', "0deg" ]
-            }) }],
-        };
-        return withAnchorPoint(transform, { x:  1, y: 1 }, { width: width *0.6, height: heightCard });
-    };
-
-    const rotateZ_Card_Three = () => {
-        let transform = {
-            transform: [{ perspective: 400 }, { rotateZ: cardThreeAnim.interpolate({
-                inputRange: [0 , 1 , 2],
-                outputRange: [ '0deg', '90deg', "0deg" ]
-            }) }],
-        };
-        return withAnchorPoint(transform, { x: 1, y: 1 }, { width: width *0.6, height: heightCard });
-    };
-    
-
 
     const touchCardOne = () =>{
         if (indexCard == 0) return;
@@ -177,16 +134,18 @@ export default function ThreeCardCompVer3() {
             LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)            
         }, DURATION_ANIM -200);
         
-    },[indexCardAnim])
+    },[indexCardAnim]);
+    
 
     return (
         <View style={{width:'100%', height: 200,marginTop: 30, }}>
             <View style={{marginLeft: 20}}>
                 {/* =========================  CARD ONE =================================== */}
                 <Animated.View style={[{width: width *0.6, backgroundColor:"#EAA300",   borderRadius: 20,
+                        marginTop: 0, marginLeft: 0,
                         position: 'absolute',
                         zIndex: indexCard == 0? 3:  1,
-                    }, rotateZ_Card_One()]} 
+                    }]} 
                     onLayout={(event) => {
                         var {x, y, width, height} = event.nativeEvent.layout;
                         setHeightCard(height);
@@ -198,20 +157,22 @@ export default function ThreeCardCompVer3() {
                 </Animated.View>
 
                 {/* =========================  CARD TWO =================================== */}
-                <Animated.View style={[{width: width *0.6, backgroundColor:"#F6E5BE",   borderRadius: 20, marginTop: 10, marginLeft: 60,
+                <Animated.View style={[{width: width *0.6, backgroundColor:"#F6E5BE",   borderRadius: 20,
+                    marginTop: 10, marginLeft: 60,
                     position: 'absolute',zIndex: indexCard == 1 ? 3
                     : indexCard == 0 ? 1: 1,
-                }, lastedIndexCard === 0? rotateZ_Card_Two_2(): rotateZ_Card_Two()]} >
+                }]} >
                     <Pressable onPress={()=> touchCardTwo()}>
                         <CardComp item={data[0]} isLeft = {indexCard == 2? true: false}  indexCard={indexCard} index={1} /> 
                     </Pressable>
                 </Animated.View>
 
                 {/* =========================  CARD THREEE =================================== */}
-                <Animated.View style={[{width: width *0.6, backgroundColor:"#EAC500",   borderRadius: 20, marginTop: 20, marginLeft: 120,
+                <Animated.View style={[{width: width *0.6, backgroundColor:"#EAC500",   borderRadius: 20, 
+                    marginTop: 20, marginLeft: 120,
                     position: 'absolute', zIndex:  indexCard == 2? 3: 
                     indexCard == 0 ? 0: 1,
-                }, rotateZ_Card_Three()]} >
+                }]} >
                     <Pressable onPress={()=> touchCardThree()}>
                         <CardComp item={data[0]} isLeft = {false}  indexCard={indexCard} index={2} /> 
                     </Pressable>

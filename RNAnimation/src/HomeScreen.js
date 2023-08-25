@@ -44,6 +44,11 @@ const listScreen = [
     name: "CreditCard",
     title: 'Credit Card',
     image: require("./assets/images/CreaditCard/index.jpg"),
+  },
+  {
+    name: "FlipCard",
+    title: 'Flip Card',
+    image: require("./assets/images/CreaditCard/index.jpg"),
   }
 ]
 
@@ -65,7 +70,7 @@ export default function HomeScreen() {
         </MotiView>
       </View> */}
 
-      <View style={{paddingHorizontal: 16}}>
+      <View style={{paddingHorizontal: 16, flex: 1}}>
         <FlatList
           data={listScreen}
           numColumns={2}

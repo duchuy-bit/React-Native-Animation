@@ -3,6 +3,9 @@ import React from 'react'
 
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import MainNavigation from './src/navigation/MainNavigation';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+import 'react-native-gesture-handler';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -22,8 +25,10 @@ export default function App() {
   // TextInput.defaultProps.style = {color: 'blue'}
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer theme={MyTheme}>
       <MainNavigation/>
     </NavigationContainer>
+    </GestureHandlerRootView>
   )
 }
