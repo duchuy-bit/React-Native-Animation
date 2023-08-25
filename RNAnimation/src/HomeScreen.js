@@ -33,12 +33,17 @@ const listScreen = [
   {
     name: "PhotoGraphyScreen",
     title: 'Photo Graphy',
+    image: require("./assets/images/PhotoGraphy/index.jpg"),
+  },
+  {
+    name: "TourBooking",
+    title: 'Tour Booking',
     image: require("./assets/images/headphone.jpg"),
   },
   {
-    name: "HeadPhoneScreen",
-    title: 'Head Phone',
-    image: require("./assets/images/headphone.jpg"),
+    name: "CreditCard",
+    title: 'Credit Card',
+    image: require("./assets/images/CreaditCard/index.jpg"),
   }
 ]
 
@@ -73,7 +78,7 @@ export default function HomeScreen() {
               // transition={{delay: index  * 200 }}
               >
                 <TouchableOpacity onPress={()=> navigation.navigate(item.name)} style={styles.itemContainer} >
-                  <Image source={item.image} style={{width: width/ 2 - 32, height: width/ 2 - 32, }}/>
+                  <Image source={item.image} style={{width: width/ 2 - 32, height: width/ 2 - 32,  borderRadius: 20,}}/>
                   <View style={{width:'100%', backgroundColor:'white', paddingBottom: 16, alignItems:'center'}}> 
                     <Text style={{fontSize: 16, marginTop: 8, fontFamily:'Montserrat-Bold'}} numberOfLines={1}>{item.title}</Text>
                   </View>
@@ -93,6 +98,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginHorizontal: 8,
     overflow:'hidden',
-    marginBottom: 16
+    marginBottom: 16,
+    backgroundColor:'white'
   }
 })
