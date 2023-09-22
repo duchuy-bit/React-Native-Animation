@@ -49,7 +49,12 @@ const listScreen = [
     name: "FlipCard",
     title: 'Flip Card',
     image: require("./assets/images/CreaditCard/index.jpg"),
-  }
+  },
+  {
+    name: "CircularProgressBar",
+    title: 'Circular Progress Bar',
+    image: require("./assets/images/CreaditCard/index.jpg"),
+  },
 ]
 
 const {width, height}  =Dimensions.get('screen')
@@ -85,7 +90,7 @@ export default function HomeScreen() {
                 <TouchableOpacity onPress={()=> navigation.navigate(item.name)} style={styles.itemContainer} >
                   <Image source={item.image} style={{width: width/ 2 - 32, height: width/ 2 - 32,  borderRadius: 20,}}/>
                   <View style={{width:'100%', backgroundColor:'white', paddingBottom: 16, alignItems:'center'}}> 
-                    <Text style={{fontSize: 16, marginTop: 8, fontFamily:'Montserrat-Bold'}} numberOfLines={1}>{item.title}</Text>
+                    <Text style={{fontSize: 16, marginTop: 8, fontFamily:'Montserrat-Bold', width:"80%"}} numberOfLines={1}>{item.title}</Text>
                   </View>
                 </TouchableOpacity>
               </View>

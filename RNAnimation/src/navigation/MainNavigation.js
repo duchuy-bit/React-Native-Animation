@@ -18,6 +18,7 @@ import DetailGraphy from '../screens/PhotoGraphy/DetailGraphy';
 import TourBooking from '../screens/TourBooking/TourBooking';
 import CreditCard from '../screens/CreditCard/CreditCard';
 import FlipCard from '../screens/FlipCard';
+import CircularProgressBar from '../screens/CircularProgressBar';
 enableScreens();
 
 export default function MainNavigation() {
@@ -41,16 +42,7 @@ export default function MainNavigation() {
       <Stack.Screen name="CarouselScreen" component={CarouselScreen}  options={{headerShown: false}}/>
 
       <Stack.Screen name="PhotoGraphyScreen" component={PhotoGraphyScreen}  options={{headerShown: false}}/>
-      <Stack.Screen name="DetailGraphy" component={DetailGraphy}  options={{headerShown: false}}
-      sharedElements={(route, otherRoute, showing) => {
-        const { item } = route.params;
-        // console.log("item  sharedElements : ",item)
-        return [
-            {id: `item.${item.id}.image`},              
-            {id:`item.${item.id}.profile`},
-            
-        ];
-      }}/>
+      <Stack.Screen name="DetailGraphy" component={DetailGraphy}  options={{headerShown: false}}/>
 
 
       <Stack.Screen name="TourBooking" component={TourBooking}  options={{headerShown: false}}/>
@@ -60,7 +52,9 @@ export default function MainNavigation() {
 
 
       <Stack.Screen name="FlipCard" component={FlipCard}  options={{headerShown: false}}/>
-      
+
+      <Stack.Screen name="CircularProgressBar" component={CircularProgressBar}  options={{headerShown: false}}/>
+      {/* CircularProgressBar */}
       {/* <Stack.Screen name="Notifications" component={Notifications} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Settings" component={Settings} /> */}

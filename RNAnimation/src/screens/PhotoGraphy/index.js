@@ -53,7 +53,7 @@ export default function PhotoGraphyScreen() {
 
           return(
             <View style={{height: height, width: width}}>
-              <SharedElement id={`item.${item.id}.image`}>
+              <SharedElement id={`item.${item.id}.image`} style={StyleSheet.absoluteFillObject}>
                 <Image
                   source={item.imageUri}
                   style={{height: height, width: width, resizeMode:'cover', position:'absolute',zIndex: -1}}

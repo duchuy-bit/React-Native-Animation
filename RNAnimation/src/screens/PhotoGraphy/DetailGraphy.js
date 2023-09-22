@@ -44,7 +44,7 @@ const listImage= [
     "https://i.pinimg.com/originals/d5/be/18/d5be1821195d4a103d27a8f990544e42.jpg",
 ]
 
-export default function DetailGraphy({ route }) {
+function DetailGraphy({ route }) {
 
     const {item} = route.params;
 
@@ -73,7 +73,6 @@ export default function DetailGraphy({ route }) {
             </Pressable>
         </Animatable.View>
 
-
         {/* ========================= DETAIL ======================== */}
         <SharedElement id={`item.${item.id}.profile`} style={{marginTop: height/3 - 70}}>
             <View style={{
@@ -81,7 +80,7 @@ export default function DetailGraphy({ route }) {
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 1 },
                 shadowOpacity: 0.8,
-                shadowRadius: 2,  
+                shadowRadius: 2,
                 elevation: 5
             }}>
             {/* -------------------------------------------------------- */}
@@ -172,5 +171,18 @@ export default function DetailGraphy({ route }) {
     </View>
   )
 }
+
+export default DetailGraphy;
+
+DetailGraphy.sharedElements = (route, otherRoute, showing) => {
+    const { item } = route.params;
+    // return [`item.${item.id}.photo`];;
+    // const { item } = route.params;
+    return [
+        {id: `item.${item.id}.image`},
+        {id:`item.${item.id}.profile`},
+        
+    ];
+  }
 
 const styles = StyleSheet.create({})
